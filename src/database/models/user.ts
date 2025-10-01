@@ -30,11 +30,22 @@ export async function createUser(
     isAdmin: userData.isAdmin || false,
   }
 
-  const insertId = await collection.insertOne(newUser)
+  try {
+    const insertId = await collection.insertOne(newUser)
 
-  return {
-    ...newUser,
-    _id: insertId,
+    return {
+      ...newUser,
+      _id: insertId,
+    }
+  } catch (error) {
+    // Log detailed error information for debugging
+    console.error("Failed to insert user:", {
+      telegramId: userData.telegramId,
+      username: userData.username,
+      email: userData.email,
+      error: error instanceof Error ? error.message : String(error),
+    })
+    throw error
   }
 }
 
