@@ -3,6 +3,7 @@ import { config } from "./config/env.ts"
 import { connectDB, closeDB } from "./database/connection.ts"
 import { registerCommands } from "./handlers/commands.ts"
 import { registerRegistrationHandlers } from "./handlers/registration.ts"
+import { registerCryptoHandlers } from "./handlers/crypto.ts"
 import type { BotContext } from "./types/index.ts"
 
 /**
@@ -25,6 +26,7 @@ async function main() {
   // Register all handlers
   registerCommands(bot)
   registerRegistrationHandlers(bot)
+  registerCryptoHandlers(bot)
 
   // Error handling for bot
   bot.catch((err) => {
