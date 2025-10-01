@@ -2,6 +2,10 @@
   "tasks": {
     "dev": "deno run --allow-net --allow-import --allow-env --allow-read --watch src/bot.ts",
     "start": "deno run --allow-net --allow-env --allow-read src/bot.ts",
+    "test": "deno test --allow-net --allow-import --allow-env --allow-read tests/",
+    "test:validation": "deno test --allow-net --allow-import --allow-env --allow-read tests/validation.test.ts",
+    "test:model": "deno test --allow-net --allow-import --allow-env --allow-read tests/user_model.test.ts",
+    "test:messages": "deno test --allow-net --allow-import --allow-env --allow-read tests/message_formatting.test.ts",
     "lint": "deno lint",
     "check": "deno check src/**/*.ts",
     "fmt": "deno fmt"
