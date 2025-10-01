@@ -1,0 +1,20 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-import --allow-env --allow-read --watch src/bot.ts",
+    "start": "deno run --allow-net --allow-env --allow-read src/bot.ts",
+    "lint": "deno lint",
+    "check": "deno check src/**/*.ts",
+    "fmt": "deno fmt"
+  },
+  "fmt": {
+    "lineWidth": 80,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  }
+}
