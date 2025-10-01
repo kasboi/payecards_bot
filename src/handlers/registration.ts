@@ -72,15 +72,17 @@ export function registerRegistrationHandlers(bot: Bot<BotContext>) {
     }
   })
 
-  // Handle text messages during registration
-  bot.on("message:text", async (ctx) => {
+  // Handle text messages during registration (but not commands)
+  bot.on("message:text", async (ctx, next) => {
     const telegramId = ctx.from?.id
-    if (!telegramId) return
+    if (!telegramId) return await next()
 
     const state = registrationState.get(telegramId)
-    if (!state) return // Not in registration process
+    if (!state) return await next() // Not in registration process, pass to next handler
 
+    // Skip if message is a command
     const text = ctx.message.text.trim()
+    if (text.startsWith("/")) return await next()
 
     // Handle username input
     if (state.step === "username") {

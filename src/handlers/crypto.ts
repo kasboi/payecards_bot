@@ -15,15 +15,15 @@ import {
 export function registerCryptoHandlers(bot: Bot<BotContext>) {
   // /crypto command - Get cryptocurrency prices
   bot.command("crypto", async (ctx) => {
-    const args = ctx.message?.text.split(" ").slice(1)
+    // Use ctx.match which contains text after the command
+    const query = ctx.match?.trim() || ""
 
     // If no argument provided, show menu
-    if (!args || args.length === 0) {
+    if (!query) {
       await showCryptoMenu(ctx)
       return
     }
 
-    const query = args.join(" ").trim()
     const coin = findCoin(query)
 
     if (!coin) {
