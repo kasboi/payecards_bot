@@ -23,8 +23,16 @@ A functional Telegram bot demonstrating scalable solution design using Telegram'
 
 ### Prerequisites
 
+**Option A: Local Development**
+
 - [Deno](https://deno.land/) (v1.40.0 or higher)
 - [MongoDB](https://www.mongodb.com/) (v7.0 or higher)
+- Telegram Bot Token (from [@BotFather](https://t.me/BotFather))
+
+**Option B: Docker**
+
+- [Docker](https://www.docker.com/) (v20.10 or higher)
+- [Docker Compose](https://docs.docker.com/compose/) (v2.0 or higher)
 - Telegram Bot Token (from [@BotFather](https://t.me/BotFather))
 
 ### 1. Clone Repository

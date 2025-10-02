@@ -1,0 +1,44 @@
+# Git files
+.git
+.gitignore
+.github
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Documentation and notes
+README.md
+CONTRIBUTING.md
+notes/
+*.md
+
+# Tests (exclude from production image)
+tests/
+
+# Deno cache
+.deno/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files (no need to copy into image)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# MongoDB script files (mounted as volume)
+db_script/
