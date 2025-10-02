@@ -35,10 +35,13 @@ export async function broadcastMessage(
 
   console.log(`📢 Starting broadcast to ${users.length} users...`)
 
+  // Add header to broadcast message
+  const broadcastMessage = `📢 *Broadcast from Payecards*\n\n${message}`
+
   // Send to each user with delay to avoid rate limits
   for (const user of users) {
     try {
-      await bot.api.sendMessage(user.telegramId, message, {
+      await bot.api.sendMessage(user.telegramId, broadcastMessage, {
         parse_mode: "Markdown",
       })
       result.success++
