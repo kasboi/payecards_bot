@@ -112,7 +112,7 @@ export function registerBroadcastHandlers(bot: Bot<BotContext>) {
       `📢 *Broadcast Preview*\n\n` +
       `*Recipients:* ${userCount} users\n\n` +
       `*Message:*\n${message}\n\n` +
-      `⚠️ This message will be sent to all registered users\\. Continue?`,
+      `⚠️ This message will be sent to all registered users. Continue?`,
       {
         parse_mode: "Markdown",
         reply_markup: keyboard,
@@ -146,20 +146,20 @@ export function registerBroadcastHandlers(bot: Bot<BotContext>) {
     const successRate = ((result.success / result.total) * 100).toFixed(1)
 
     let resultMessage =
-      `✅ *Broadcast Complete\\!*\n\n` +
+      `✅ *Broadcast Complete!*\n\n` +
       `📊 *Statistics:*\n` +
       `• Total Recipients: ${result.total}\n` +
       `• Successfully Sent: ${result.success} (${successRate}%)\n` +
       `• Failed: ${result.failed}\n\n`
 
     if (result.failed > 0) {
-      resultMessage += `⚠️ Some messages failed to deliver\\. This usually happens when:\n`
+      resultMessage += `⚠️ Some messages failed to deliver. This usually happens when:\n`
       resultMessage += `• Users blocked the bot\n`
       resultMessage += `• Users deleted their Telegram account\n`
       resultMessage += `• Network issues occurred\n\n`
     }
 
-    resultMessage += `Use /broadcast\\_history to view past broadcasts\\.`
+    resultMessage += `Use /broadcast\\_history to view past broadcasts.`
 
     await ctx.reply(resultMessage, { parse_mode: "Markdown" })
   })
