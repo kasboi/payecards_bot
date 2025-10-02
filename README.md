@@ -2,7 +2,7 @@
 
 A functional Telegram bot demonstrating scalable solution design using Telegram's Bot API, featuring user registration, cryptocurrency price tracking, and admin broadcast messaging.
 
-## 🚀 Features
+## Features
 
 - **User Registration**: Users can register with username and email
 - **Cryptocurrency Tracking**: Real-time crypto prices from CoinGecko API
@@ -11,7 +11,7 @@ A functional Telegram bot demonstrating scalable solution design using Telegram'
 - **Session Management**: Stateful conversations for multi-step flows
 - **Database**: MongoDB for persistent data storage
 
-## 📋 Tech Stack
+## Tech Stack
 
 - **Runtime**: Deno (v1.40.0+)
 - **Language**: TypeScript
@@ -19,7 +19,7 @@ A functional Telegram bot demonstrating scalable solution design using Telegram'
 - **Database**: MongoDB (v7.0+)
 - **API**: CoinGecko
 
-## 🛠️ Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 
@@ -88,7 +88,7 @@ deno task dev
 deno task start
 ```
 
-## 📚 Bot Commands
+## Bot Commands
 
 ### User Commands
 
@@ -105,7 +105,7 @@ deno task start
 - `/cancel_broadcast` - Cancel ongoing broadcast composition
 - `/stats` - View bot statistics (users, broadcasts, etc.)
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 payecards_bot/
@@ -150,7 +150,7 @@ payecards_bot/
 └── README.md
 ```
 
-## 🎨 Design Decisions
+## Design Decisions
 
 ### 1. **Deno over Node.js**
 
@@ -195,7 +195,7 @@ payecards_bot/
 - Stateful multi-step conversations
 - Automatic session cleanup
 
-## 🔒 Security Considerations
+## Security Considerations
 
 - **Environment Variables**: Sensitive data stored in `.env` (gitignored)
 - **Admin Authentication**: Dual-layer admin verification (env + database)
@@ -205,7 +205,7 @@ payecards_bot/
 - **Database Validation**: MongoDB schema validation for data integrity
 - **Secure Permissions**: Deno's explicit permission model
 
-## 🎯 Key Features Explained
+## Key Features Explained
 
 ### User Registration System
 
@@ -241,7 +241,7 @@ payecards_bot/
 - Graceful degradation
 - Database connection resilience
 
-## 🚧 Future Enhancements
+## Future Enhancements
 
 - [ ] Implement user preferences/settings
 - [ ] Add scheduled broadcasts (cron jobs)
@@ -252,7 +252,7 @@ payecards_bot/
 - [ ] Add portfolio tracking feature
 - [ ] Implement Redis for session storage (production)
 
-## 🧪 Testing
+## Testing
 
 The project includes comprehensive unit tests:
 
@@ -263,7 +263,7 @@ The project includes comprehensive unit tests:
 
 Run tests with `deno task test` for full coverage.
 
-## 📝 Development Workflow
+## Development Workflow
 
 ### Git Workflow
 
@@ -271,25 +271,25 @@ Run tests with `deno task test` for full coverage.
 - Test each stage before moving to next
 - Use conventional commit format: `feat:`, `fix:`, `docs:`, etc.
 
-## 📄 License
+## License
 
 MIT License - See LICENSE file for details
 
-## 👤 Author
+## Author
 
 **Abdullah Solahudeen**
 
 - Email: solahudeen15@gmail.com
 - GitHub: [@kasboi](https://github.com/kasboi)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [grammY](https://grammy.dev/) - Excellent Telegram bot framework
 - [CoinGecko](https://www.coingecko.com/) - Free cryptocurrency API
 - [Deno](https://deno.land/) - Modern TypeScript runtime
 - [MongoDB](https://www.mongodb.com/) - Flexible NoSQL database
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Bot doesn't respond
 
@@ -316,7 +316,7 @@ MIT License - See LICENSE file for details
 - Try using full coin name: `/crypto bitcoin` instead of `/crypto btc`
 - Check logs for API errors
 
-## 📞 Support
+## Support
 
 For issues or questions:
 
