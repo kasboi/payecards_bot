@@ -5,19 +5,23 @@ import { registerCommands } from "./handlers/commands.ts"
 import { registerRegistrationHandlers } from "./handlers/registration.ts"
 import { registerCryptoHandlers } from "./handlers/crypto.ts"
 import { registerBroadcastHandlers } from "./handlers/broadcast.ts"
+import { errorHandler } from "./middleware/error.ts"
+import { createLogger } from "./utils/logger.ts"
 import type { BotContext } from "./types/index.ts"
+
+const logger = createLogger("Bot")
 
 /**
  * Main bot initialization and startup
  */
 async function main() {
-  console.log("🤖 Starting Payecards Bot...")
+  logger.info("Starting Payecards Bot...")
 
   // Connect to MongoDB first
   try {
     await connectDB()
-  } catch (_error) {
-    console.error("❌ Failed to connect to database. Exiting...")
+  } catch (error) {
+    logger.error("Failed to connect to database. Exiting...", error)
     Deno.exit(1)
   }
 
@@ -30,20 +34,18 @@ async function main() {
   registerCryptoHandlers(bot)
   registerBroadcastHandlers(bot)
 
-  // Error handling for bot
-  bot.catch((err) => {
-    console.error("❌ Bot error occurred:", err)
-  })
+  // Register error handler
+  bot.catch(errorHandler)
 
   // Start bot with long polling
-  console.log("✅ Bot is running! Press Ctrl+C to stop.")
-  console.log(`👑 Admin IDs: ${config.ADMIN_IDS.join(", ")}`)
+  logger.info("Bot is running! Press Ctrl+C to stop.")
+  logger.info(`Admin IDs: ${config.ADMIN_IDS.join(", ")}`)
   await bot.start()
 }
 
 // Handle graceful shutdown
 const shutdown = async () => {
-  console.log("\n👋 Shutting down bot...")
+  logger.info("Shutting down bot...")
   await closeDB()
   Deno.exit(0)
 }
@@ -53,10 +55,8 @@ Deno.addSignalListener("SIGTERM", shutdown)
 
 // Start the bot
 if (import.meta.main) {
-  try {
-    await main()
-  } catch (error) {
-    console.error("❌ Fatal error:", error)
+  main().catch((error) => {
+    logger.error("Fatal error", error)
     Deno.exit(1)
-  }
+  })
 }

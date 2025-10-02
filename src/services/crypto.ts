@@ -1,5 +1,9 @@
 import { config } from "../config/env.ts"
 import type { CoinGeckoSimplePrice, CryptoPrice } from "../types/index.ts"
+import { createLogger } from "../utils/logger.ts"
+import { createExternalAPIError, type AppError } from "../utils/errors.ts"
+
+const logger = createLogger("CryptoService")
 
 /**
  * Supported cryptocurrencies
@@ -28,19 +32,29 @@ export async function getCryptoPrice(
   try {
     const url = `${config.COINGECKO_API_URL}/simple/price?ids=${coinId}&vs_currencies=usd&include_24hr_change=true`
 
+    logger.debug(`Fetching price for ${coinId}`)
+
     const response = await fetch(url)
 
     if (!response.ok) {
-      console.error(
-        `❌ CoinGecko API error: ${response.status} ${response.statusText}`,
+      const errorText = await response.text()
+      logger.error(`CoinGecko API error: ${response.status}`, {
+        body: errorText,
+      })
+      throw createExternalAPIError(
+        "CoinGecko",
+        `HTTP ${response.status}: ${response.statusText}`,
       )
-      return null
     }
 
     const data: CoinGeckoSimplePrice = await response.json()
+    logger.info(`Successfully fetched price for ${coinId}`)
     return data
   } catch (error) {
-    console.error("❌ Error fetching crypto price:", error)
+    if (error instanceof Error && (error as AppError).code === "EXTERNAL_API_ERROR") {
+      throw error
+    }
+    logger.error("Error fetching crypto price", error)
     return null
   }
 }
@@ -56,19 +70,29 @@ export async function getCryptoMarketData(
   try {
     const url = `${config.COINGECKO_API_URL}/coins/markets?vs_currency=usd&ids=${coinId}`
 
+    logger.debug(`Fetching market data for ${coinId}`)
+
     const response = await fetch(url)
 
     if (!response.ok) {
-      console.error(
-        `❌ CoinGecko API error: ${response.status} ${response.statusText}`,
+      const errorText = await response.text()
+      logger.error(`CoinGecko API error: ${response.status}`, {
+        body: errorText,
+      })
+      throw createExternalAPIError(
+        "CoinGecko",
+        `HTTP ${response.status}: ${response.statusText}`,
       )
-      return null
     }
 
     const data: CryptoPrice[] = await response.json()
+    logger.info(`Successfully fetched market data for ${coinId}`)
     return data.length > 0 ? data[0] : null
   } catch (error) {
-    console.error("❌ Error fetching crypto market data:", error)
+    if (error instanceof Error && (error as AppError).code === "EXTERNAL_API_ERROR") {
+      throw error
+    }
+    logger.error("Error fetching crypto market data", error)
     return null
   }
 }
@@ -85,19 +109,29 @@ export async function getMultipleCryptoPrices(
     const ids = coinIds.join(",")
     const url = `${config.COINGECKO_API_URL}/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
 
+    logger.debug(`Fetching prices for multiple coins: ${ids}`)
+
     const response = await fetch(url)
 
     if (!response.ok) {
-      console.error(
-        `❌ CoinGecko API error: ${response.status} ${response.statusText}`,
+      const errorText = await response.text()
+      logger.error(`CoinGecko API error: ${response.status}`, {
+        body: errorText,
+      })
+      throw createExternalAPIError(
+        "CoinGecko",
+        `HTTP ${response.status}: ${response.statusText}`,
       )
-      return null
     }
 
     const data: CoinGeckoSimplePrice = await response.json()
+    logger.info(`Successfully fetched prices for ${coinIds.length} coins`)
     return data
   } catch (error) {
-    console.error("❌ Error fetching multiple crypto prices:", error)
+    if (error instanceof Error && (error as AppError).code === "EXTERNAL_API_ERROR") {
+      throw error
+    }
+    logger.error("Error fetching multiple crypto prices", error)
     return null
   }
 }
