@@ -67,6 +67,8 @@ COINGECKO_API_URL=https://api.coingecko.com/api/v3
 
 ### 3. Initialize Database
 
+_N.B: You can skip this step if using Docker as it initializes the database automatically._
+
 ```bash
 # Start MongoDB
 mongod
@@ -89,9 +91,16 @@ deno task dev
 deno task start
 ```
 
+**Docker**:
+
+```bash
+docker compose up --build
+```
+
 ## Bot Commands
 
 The bot features an **interactive command menu** that appears when you click the "/" button in Telegram. This menu automatically shows:
+
 - Standard commands for regular users
 - Additional admin commands for administrators (based on your Telegram ID)
 
