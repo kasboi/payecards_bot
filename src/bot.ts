@@ -8,6 +8,7 @@ import { registerBroadcastHandlers } from "./handlers/broadcast.ts"
 import { sessionMiddleware } from "./middleware/session.ts"
 import { errorHandler } from "./middleware/error.ts"
 import { createLogger } from "./utils/logger.ts"
+import { setupBotCommands } from "./utils/commands.ts"
 import type { BotContext } from "./types/index.ts"
 
 const logger = createLogger("Bot")
@@ -41,6 +42,9 @@ async function main() {
 
   // Register error handler
   bot.catch(errorHandler)
+
+  // Set up bot command menu
+  await setupBotCommands(bot)
 
   // Start bot with long polling
   logger.info("Bot is running! Press Ctrl+C to stop.")

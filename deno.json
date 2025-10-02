@@ -6,6 +6,7 @@
     "test:validation": "deno test --allow-net --allow-import --allow-env --allow-read tests/validation.test.ts",
     "test:model": "deno test --allow-net --allow-import --allow-env --allow-read tests/user_model.test.ts",
     "test:messages": "deno test --allow-net --allow-import --allow-env --allow-read tests/message_formatting.test.ts",
+    "test:commands": "deno test --allow-net --allow-import --allow-env --allow-read tests/commands.test.ts",
     "lint": "deno lint",
     "check": "deno check src/**/*.ts",
     "fmt": "deno fmt"

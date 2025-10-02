@@ -7,6 +7,7 @@ A functional Telegram bot demonstrating scalable solution design using Telegram'
 - **User Registration**: Users can register with username and email
 - **Cryptocurrency Tracking**: Real-time crypto prices from CoinGecko API
 - **Admin Broadcasting**: Send messages to all registered users with broadcast history
+- **Command Menu**: Interactive command menu accessible via "/" button in Telegram
 - **Error Handling**: Comprehensive error handling and logging with retry mechanisms
 - **Session Management**: Stateful conversations for multi-step flows
 - **Database**: MongoDB for persistent data storage
@@ -90,6 +91,10 @@ deno task start
 
 ## Bot Commands
 
+The bot features an **interactive command menu** that appears when you click the "/" button in Telegram. This menu automatically shows:
+- Standard commands for regular users
+- Additional admin commands for administrators (based on your Telegram ID)
+
 ### User Commands
 
 - `/start` - Welcome message and bot overview
@@ -133,7 +138,8 @@ payecards_bot/
 │   │   ├── logger.ts             # Logging utility
 │   │   ├── validation.ts         # Input validation
 │   │   ├── errors.ts             # Custom error classes
-│   │   └── retry.ts              # Retry mechanism
+│   │   ├── retry.ts              # Retry mechanism
+│   │   └── commands.ts           # Bot command menu setup
 │   └── types/
 │       └── index.ts              # TypeScript interfaces
 ├── tests/

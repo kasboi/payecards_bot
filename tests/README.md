@@ -70,6 +70,23 @@ Tests for Telegram message formatting (prevents API errors).
 deno task test:messages
 ```
 
+### 4. `tests/commands.test.ts`
+
+Tests for bot command menu configuration.
+
+**Coverage:**
+
+- ✅ User commands are properly defined
+- ✅ Admin commands include all user commands plus admin-only commands
+- ✅ All commands have descriptions
+- ✅ Command names follow Telegram format rules (lowercase + underscores)
+
+**Run:**
+
+```bash
+deno task test:commands
+```
+
 ## Running Tests
 
 ### Run All Tests
