@@ -1,7 +1,19 @@
-import { Context } from "https://deno.land/x/grammy@v1.38.2/mod.ts"
+import { Context, SessionFlavor } from "https://deno.land/x/grammy@v1.38.2/mod.ts"
 
-// Custom context type (can be extended later)
-export type BotContext = Context
+// Session data interface
+export interface SessionData {
+  registrationStep?: "username" | "email"
+  registrationData?: {
+    username?: string
+  }
+  broadcastStep?: "composing" | "confirming"
+  broadcastData?: {
+    message?: string
+  }
+}
+
+// Custom context type with session support
+export type BotContext = Context & SessionFlavor<SessionData>
 
 // User interface (for database)
 export interface User {

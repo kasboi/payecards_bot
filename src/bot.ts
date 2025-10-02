@@ -5,6 +5,7 @@ import { registerCommands } from "./handlers/commands.ts"
 import { registerRegistrationHandlers } from "./handlers/registration.ts"
 import { registerCryptoHandlers } from "./handlers/crypto.ts"
 import { registerBroadcastHandlers } from "./handlers/broadcast.ts"
+import { sessionMiddleware } from "./middleware/session.ts"
 import { errorHandler } from "./middleware/error.ts"
 import { createLogger } from "./utils/logger.ts"
 import type { BotContext } from "./types/index.ts"
@@ -27,6 +28,10 @@ async function main() {
 
   // Initialize bot with token
   const bot = new Bot<BotContext>(config.BOT_TOKEN)
+
+  // Apply session middleware first (before handlers)
+  bot.use(sessionMiddleware)
+  logger.info("Session middleware enabled")
 
   // Register all handlers
   registerCommands(bot)
