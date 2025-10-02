@@ -4,6 +4,7 @@ import { connectDB, closeDB } from "./database/connection.ts"
 import { registerCommands } from "./handlers/commands.ts"
 import { registerRegistrationHandlers } from "./handlers/registration.ts"
 import { registerCryptoHandlers } from "./handlers/crypto.ts"
+import { registerBroadcastHandlers } from "./handlers/broadcast.ts"
 import type { BotContext } from "./types/index.ts"
 
 /**
@@ -27,6 +28,7 @@ async function main() {
   registerCommands(bot)
   registerRegistrationHandlers(bot)
   registerCryptoHandlers(bot)
+  registerBroadcastHandlers(bot)
 
   // Error handling for bot
   bot.catch((err) => {
@@ -35,6 +37,7 @@ async function main() {
 
   // Start bot with long polling
   console.log("✅ Bot is running! Press Ctrl+C to stop.")
+  console.log(`👑 Admin IDs: ${config.ADMIN_IDS.join(", ")}`)
   await bot.start()
 }
 
