@@ -1,0 +1,55 @@
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: payecards_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: payecards_bot
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./db_script:/docker-entrypoint-initdb.d:ro
+    networks:
+      - payecards_network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Telegram Bot
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: payecards_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Override MongoDB URI to use Docker network
+      MONGO_URI: mongodb://mongodb:27017/payecards_bot
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - payecards_network
+    # Optional: Add resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 256M
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  payecards_network:
+    driver: bridge
