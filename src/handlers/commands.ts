@@ -111,6 +111,10 @@ Let's get started! Use /register to create your account.
   // Callback handlers for /start inline keyboard
   bot.callbackQuery("start_register", async (ctx) => {
     await ctx.answerCallbackQuery()
+
+    // Remove the inline keyboard from the original message
+    await ctx.editMessageReplyMarkup({ reply_markup: undefined })
+
     await ctx.reply(
       "📝 *Registration*\n\n" +
       "Please use the /register command to start the registration process\\.\n\n" +
@@ -123,6 +127,9 @@ Let's get started! Use /register to create your account.
 
   bot.callbackQuery("start_crypto", async (ctx) => {
     await ctx.answerCallbackQuery()
+
+    // Remove the inline keyboard from the original message
+    await ctx.editMessageReplyMarkup({ reply_markup: undefined })
 
     const keyboard = new InlineKeyboard()
       .text("₿ Bitcoin", "crypto_bitcoin")
@@ -146,6 +153,9 @@ Let's get started! Use /register to create your account.
 
   bot.callbackQuery("start_help", async (ctx) => {
     await ctx.answerCallbackQuery()
+
+    // Remove the inline keyboard from the original message
+    await ctx.editMessageReplyMarkup({ reply_markup: undefined })
 
     // Trigger the help command
     const adminStatus = await isAdmin(ctx)
@@ -190,6 +200,10 @@ Let's get started! Use /register to create your account.
   // Callback handlers for /help inline keyboard
   bot.callbackQuery("help_register", async (ctx) => {
     await ctx.answerCallbackQuery()
+
+    // Remove the inline keyboard from the original message
+    await ctx.editMessageReplyMarkup({ reply_markup: undefined })
+
     await ctx.reply(
       "📝 *Registration*\n\n" +
       "Please use the /register command to start the registration process\\.\n\n" +
@@ -202,6 +216,9 @@ Let's get started! Use /register to create your account.
 
   bot.callbackQuery("help_crypto", async (ctx) => {
     await ctx.answerCallbackQuery()
+
+    // Remove the inline keyboard from the original message
+    await ctx.editMessageReplyMarkup({ reply_markup: undefined })
 
     const keyboard = new InlineKeyboard()
       .text("₿ Bitcoin", "crypto_bitcoin")
@@ -225,6 +242,9 @@ Let's get started! Use /register to create your account.
 
   bot.callbackQuery("help_stats", async (ctx) => {
     await ctx.answerCallbackQuery()
+
+    // Remove the inline keyboard from the original message
+    await ctx.editMessageReplyMarkup({ reply_markup: undefined })
 
     const adminStatus = await isAdmin(ctx)
 
